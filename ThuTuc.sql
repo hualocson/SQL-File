@@ -16,6 +16,10 @@ GO
 CREATE PROC deleteMember(@id int)
 AS UPDATE Member SET is_deleted = 1 where id = @id
 GO
+
+CREATE FUNCTION getMemberByUsername (@username varchar(50)) RETURNS TABLE
+AS RETURN (SELECT * FROM Member WHERE is_deleted = 0 AND username = @username)
+GO
 --End Member
 
 --Start Tasks
