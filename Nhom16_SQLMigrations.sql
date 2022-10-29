@@ -160,5 +160,11 @@ END
 GO
 INSERT into [Member](name, username, password, [role], gender, is_deleted) values (N'Pham Dung', 'dung.pham@xperc.com','1234567890',4,1,0);
 GO
-
+create table Company_Details (
+	id int IDENTITY(1,1) not null constraint Company_Details_id_pk PRIMARY KEY,
+	address nvarchar(128),
+	phone varchar(20)
+);
+ALTER TABLE Company add company_details int;
+ALTER TABLE Company add constraint Company_company_details_fk FOREIGN KEY (company_details) REFERENCES Company_Details(id);
 
