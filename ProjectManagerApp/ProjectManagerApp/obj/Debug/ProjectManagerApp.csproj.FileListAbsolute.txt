@@ -1,0 +1,14 @@
+D:\Workspace\HK1 2022-2023\Database Management System\Assignments\Cuoi Ky\ProjectManagerApp\ProjectManagerApp\bin\Debug\ProjectManagerApp.exe.config
+D:\Workspace\HK1 2022-2023\Database Management System\Assignments\Cuoi Ky\ProjectManagerApp\ProjectManagerApp\bin\Debug\ProjectManagerApp.exe
+D:\Workspace\HK1 2022-2023\Database Management System\Assignments\Cuoi Ky\ProjectManagerApp\ProjectManagerApp\bin\Debug\ProjectManagerApp.pdb
+D:\Workspace\HK1 2022-2023\Database Management System\Assignments\Cuoi Ky\ProjectManagerApp\ProjectManagerApp\obj\Debug\ProjectManagerApp.csproj.AssemblyReference.cache
+D:\Workspace\HK1 2022-2023\Database Management System\Assignments\Cuoi Ky\ProjectManagerApp\ProjectManagerApp\obj\Debug\ProjectManagerApp.csproj.SuggestedBindingRedirects.cache
+D:\Workspace\HK1 2022-2023\Database Management System\Assignments\Cuoi Ky\ProjectManagerApp\ProjectManagerApp\obj\Debug\ProjectManagerApp.frmMain.resources
+D:\Workspace\HK1 2022-2023\Database Management System\Assignments\Cuoi Ky\ProjectManagerApp\ProjectManagerApp\obj\Debug\ProjectManagerApp.Properties.Resources.resources
+D:\Workspace\HK1 2022-2023\Database Management System\Assignments\Cuoi Ky\ProjectManagerApp\ProjectManagerApp\obj\Debug\ProjectManagerApp.Views.frmCompany.resources
+D:\Workspace\HK1 2022-2023\Database Management System\Assignments\Cuoi Ky\ProjectManagerApp\ProjectManagerApp\obj\Debug\ProjectManagerApp.csproj.GenerateResource.cache
+D:\Workspace\HK1 2022-2023\Database Management System\Assignments\Cuoi Ky\ProjectManagerApp\ProjectManagerApp\obj\Debug\ProjectManagerApp.csproj.CoreCompileInputs.cache
+D:\Workspace\HK1 2022-2023\Database Management System\Assignments\Cuoi Ky\ProjectManagerApp\ProjectManagerApp\obj\Debug\ProjectManagerApp.exe
+D:\Workspace\HK1 2022-2023\Database Management System\Assignments\Cuoi Ky\ProjectManagerApp\ProjectManagerApp\obj\Debug\ProjectManagerApp.pdb
+D:\Workspace\HK1 2022-2023\Database Management System\Assignments\Cuoi Ky\ProjectManagerApp\ProjectManagerApp\obj\Debug\ProjectManagerApp.frmLogin.resources
+D:\Workspace\HK1 2022-2023\Database Management System\Assignments\Cuoi Ky\ProjectManagerApp\ProjectManagerApp\obj\Debug\ProjectManagerApp.Views.frmProject.resources
