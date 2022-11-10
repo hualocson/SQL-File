@@ -57,5 +57,28 @@ namespace ProjectManagerApp.DB_Layer
             }
             return f;
         }
+        public string ExcuteQueryScalar(string strSQL, CommandType ct, ref string error)
+        {
+            string k = null;
+            if (conn.State == ConnectionState.Open)
+                conn.Close();
+            conn.Open();
+            comm.CommandText = strSQL;
+            comm.CommandType = ct;
+            try
+            {
+
+                k = comm.ExecuteScalar().ToString();
+            }
+            catch (SqlException e)
+            {
+                error = e.Message;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return k;
+        }
     }
 }
