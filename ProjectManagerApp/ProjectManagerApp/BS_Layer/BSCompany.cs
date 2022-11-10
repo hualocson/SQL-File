@@ -18,8 +18,20 @@ namespace ProjectManagerApp.BS_Layer
         }
         public DataTable getAllCompany()
         {
-            string sqlString = "getAllCompany";
-            return db.ExecuteQueryDataSet(sqlString, CommandType.StoredProcedure).Tables[0];
+            string sqlString = "EXEC getAllCompany";
+            return db.ExecuteQueryDataSet(sqlString, CommandType.Text).Tables[0];
+        }
+        public bool addCompany(string name, string abbreviation, int company_details, ref string err)
+        {
+            return db.MyExecuteNonQuery($"EXEC addCompany '{name}',N'{abbreviation}',{company_details}", CommandType.Text, ref err);
+        }
+        public bool updateCompany(int id, string name, string abbreviation, int company_details, ref string err)
+        {
+            return db.MyExecuteNonQuery($"EXEC updateCompany {id},'{name}',N'{abbreviation}',{company_details}", CommandType.Text, ref err);
+        }
+        public bool deleteCompany(int id, ref string err)
+        {
+            return db.MyExecuteNonQuery($"EXEC deleteCompany {id}", CommandType.Text, ref err);
         }
     }
 }

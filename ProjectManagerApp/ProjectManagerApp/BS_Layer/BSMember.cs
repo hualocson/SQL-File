@@ -16,29 +16,44 @@ namespace ProjectManagerApp.BS_Layer
             db = new DBMain();
         }
 
-        public DataTable getUserByUsername(string username, ref string err)
+        public int getUserByUsername(string username,string password, ref string err)
         {
-            string sqlString = $"Select * From getMemberByUsername ('{username}')";
-            return db.ExecuteQueryDataSet(sqlString, CommandType.Text).Tables[0];
+            string sqlString = $"SELECT dbo.getMemberByUsername('{username}','{password}')";
+            return Int32.Parse(db.ExcuteQueryScalar(sqlString, CommandType.Text,ref err));
         }
 
         public DataTable getAllMember()
         {
-            string sqlString = "Exec getAllMember";
+            string sqlString = "EXEC getAllMember";
             return db.ExecuteQueryDataSet(sqlString, CommandType.Text).Tables[0];
         }
 
         public bool login(string username, string password, ref string err)
         {
-            DataTable user = getUserByUsername(username, ref err);
-            if (user.Rows.Count == 0)
+            int count = getUserByUsername(username,password, ref err);
+            if (count !=0)
             {
-                return false;
+                return true;
             }
             else
             {
-                return (user.Rows[0][6].ToString().Equals(password));
+                return false;
             }
+        }
+
+        public bool addMember(string name, int gender, int role, int team_id, string username, string password, int company_id,ref string err)
+        {
+            return db.MyExecuteNonQuery($"EXEC addMember '{name}',{gender},{role},{team_id},'{username}','{password}',{company_id}", CommandType.Text, ref err);
+        }
+
+        public bool updateMember(int id, string name, int gender, int role, int team_id, string username, string password, int company_id, ref string err)
+        {
+            return db.MyExecuteNonQuery($"EXEC updateMember {id},'{name}',{gender},{role},{team_id},'{username}','{password}',{company_id}", CommandType.Text, ref err);
+        }
+
+        public bool deleteMember(int id, ref string err)
+        {
+            return db.MyExecuteNonQuery($"EXEC deleteMember {id}", CommandType.Text, ref err);
         }
     }
 }
