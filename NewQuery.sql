@@ -16,3 +16,17 @@ BEGIN
 END
 GO
 -- END UPDATE
+
+-- UPDATE 12/11/2002 10:15 PM
+CREATE OR ALTER PROC addTeamToProject(@team_id int, @project_id int, @created_at datetime)
+AS 
+	BEGIN TRAN
+		INSERT INTO Project_Team VALUES(@team_id,@project_id,@created_at)
+		IF (@@ERROR <> 0)
+			BEGIN
+				ROLLBACK
+				RETURN
+			END
+	COMMIT TRAN
+GO
+-- END UPDATE
