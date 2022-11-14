@@ -29,4 +29,16 @@ AS
 			END
 	COMMIT TRAN
 GO
+
+CREATE OR ALTER PROC addMemberToProject(@project_id int, @member_id int)
+AS 
+	BEGIN TRAN
+		INSERT INTO Project_Member(project_id,member_id,is_deleted) VALUES(@project_id,@member_id,0)
+		IF (@@ERROR <> 0)
+			BEGIN
+				ROLLBACK
+				RETURN
+			END
+	COMMIT TRAN
+GO
 -- END UPDATE
