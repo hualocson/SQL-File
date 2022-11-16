@@ -17,6 +17,31 @@ END
 GO
 -- END UPDATE
 
+-- UPDATE 12/11/2002 10:15 PM
+CREATE OR ALTER PROC addTeamToProject(@team_id int, @project_id int, @created_at datetime)
+AS
+	BEGIN TRAN
+		INSERT INTO Project_Team VALUES(@team_id,@project_id,@created_at)
+		IF (@@ERROR <> 0)
+			BEGIN
+				ROLLBACK
+				RETURN
+			END
+	COMMIT TRAN
+GO
+
+CREATE OR ALTER PROC addMemberToProject(@project_id int, @member_id int)
+AS
+	BEGIN TRAN
+		INSERT INTO Project_Member(project_id,member_id,is_deleted) VALUES(@project_id,@member_id,0)
+		IF (@@ERROR <> 0)
+			BEGIN
+				ROLLBACK
+				RETURN
+			END
+	COMMIT TRAN
+GO
+-- END UPDATE
 -- UPDATE 12/11/2002
 create trigger validate_datetime_projects on dbo.Project
 AFTER INSERT, UPDATE AS BEGIN
