@@ -80,3 +80,19 @@ Create or ALTER proc getTeamByCompanyId(@id int)
 as
 SELECT t.id, t.name FROM Team t, Company c WHERE t.company_id = c.id and c.id = @id
 -- End hualocson 16/11/2022
+
+-- UPDATE 16/11/2022 6:48 PM
+CREATE OR ALTER PROC deleteProject(@id int)
+AS
+	BEGIN TRAN
+		UPDATE Project_Member SET is_deleted = 1 WHERE project_id = @id
+		DELETE FROM Project_Team WHERE project_id = @id
+		UPDATE Project SET is_deleted = 1 WHERE id = @id
+		IF (@@ERROR <> 0)
+			BEGIN
+				ROLLBACK
+				RETURN
+			END
+	COMMIT TRAN
+GO
+-- END UPDATE
