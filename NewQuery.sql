@@ -96,3 +96,9 @@ AS
 	COMMIT TRAN
 GO
 -- END UPDATE
+
+-- UPDATE 16/11/2022 7:05 PM
+CREATE OR ALTER FUNCTION getTeamLeadInCompany(@id int) RETURNS table
+AS RETURN (SELECT Member.id, Member.name FROM Member, role WHERE is_deleted = 0 AND Member.role = role.id AND role.name = 'Team Lead' AND company_id = @id)
+GO
+-- END UPDATE
