@@ -72,3 +72,15 @@ CREATE OR ALTER FUNCTION searchProjectByName(@name varchar(50)) RETURNS TABLE
 AS RETURN (SELECT * FROM AllProject WHERE name LIKE '%'+@name+'%')
 GO
 -- End update
+
+-- Update 10:26 PM
+CREATE OR ALTER FUNCTION searchMemberByName(@name varchar(50)) RETURNS TABLE
+AS RETURN (SELECT Q1.id, Q1.name, Q1.gender, Q1.role_id, Q1.role, Q1.team_id, Q1.team_name, Q1.username, Q1.password, Q1.company_id, dbo.Company.name AS company_name, Q1.abbreviation
+FROM   (SELECT dbo.Member.id, dbo.Member.name, dbo.Member.gender, dbo.Member.role AS role_id, dbo.Member.team_id, dbo.Member.username, dbo.Member.password, dbo.Member.company_id, dbo.role.name AS role, dbo.role.abbreviation, dbo.Team.name AS team_name
+             FROM    dbo.Member LEFT JOIN
+                           dbo.role ON dbo.Member.role = dbo.role.id LEFT JOIN
+                           dbo.Team ON dbo.Member.team_id = dbo.Team.id
+             WHERE  (dbo.Member.is_deleted = 0)) AS Q1 LEFT JOIN
+             dbo.Company ON Q1.company_id = dbo.Company.id WHERE Q1.name LIKE '%'+@name+'%')
+GO
+-- End update
