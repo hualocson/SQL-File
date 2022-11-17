@@ -21,3 +21,15 @@ AS
 	END
 GO
 -- End update
+
+-- Update 17/11/2022 2:29 PM
+CREATE OR ALTER FUNCTION checkExistUserAndTeamCompanyRoleIsNull(@username varchar(50))RETURNS int AS
+BEGIN
+	DECLARE @id int
+	SELECT @id = id FROM Member WHERE is_deleted = 0 AND username = @username AND team_id is NULL AND company_id is null AND role is null
+	IF (@id is null)
+		SET @id = 0
+	RETURN @id
+END
+GO
+-- End update
