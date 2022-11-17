@@ -84,3 +84,9 @@ FROM   (SELECT dbo.Member.id, dbo.Member.name, dbo.Member.gender, dbo.Member.rol
              dbo.Company ON Q1.company_id = dbo.Company.id WHERE Q1.name LIKE '%'+@name+'%')
 GO
 -- End update
+
+-- Update 11:52 PM
+CREATE OR ALTER FUNCTION searchMemberByName(@name varchar(50)) RETURNS TABLE
+AS RETURN (SELECT * FROM AllMember WHERE name LIKE '%'+@name+'%')
+GO
+-- End update
