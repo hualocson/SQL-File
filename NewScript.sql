@@ -61,3 +61,14 @@ CREATE PROC getCompanyById(@id int)
 AS (SELECT * FROM Company WHERE id = @id)
 GO
 -- End update
+
+-- Update 17/11/2022 10:03 PM
+CREATE OR ALTER FUNCTION searchCompanyByName(@name varchar(50)) RETURNS TABLE
+AS RETURN (SELECT * FROM AllCompany WHERE name LIKE '%'+@name+'%')
+GO
+	-- Cách dùng: SELECT * FROM dbo.searchCompanyByName({name})
+
+CREATE OR ALTER FUNCTION searchProjectByName(@name varchar(50)) RETURNS TABLE
+AS RETURN (SELECT * FROM AllProject WHERE name LIKE '%'+@name+'%')
+GO
+-- End update
