@@ -33,3 +33,9 @@ BEGIN
 END
 GO
 -- End update
+
+-- Update 17/11/2022 2:43 PM
+CREATE OR ALTER PROC getMemberById(@id int)
+AS (SELECT id,name,gender,role,team_id,username,password,company_id FROM Member WHERE is_deleted = 0 AND id = @id)
+GO
+-- End update
