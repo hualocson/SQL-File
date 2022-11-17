@@ -39,3 +39,18 @@ CREATE OR ALTER PROC getMemberById(@id int)
 AS (SELECT id,name,gender,role,team_id,username,password,company_id FROM Member WHERE is_deleted = 0 AND id = @id)
 GO
 -- End update
+
+-- Update 17/11/2022 3:50 PM
+ALTER PROC updateMember(@id int, @name varchar(128), @gender bit, @role int, @team_id int, @username varchar(50), @password varchar(50), @company_id int)
+AS 
+	BEGIN TRAN
+		UPDATE Member SET name = @name, gender = @gender, role = @role, team_id = @team_id, username = @username, password = @password, company_id = @company_id WHERE id = @id
+		IF (@role = 2)
+			UPDATE Team SET team_lead = @id WHERE id = @team_id
+		IF (@@ERROR <> 0)
+			BEGIN
+				ROLLBACK
+				RETURN
+			END
+	COMMIT TRAN
+-- End update
