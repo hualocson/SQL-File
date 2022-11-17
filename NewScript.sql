@@ -53,4 +53,11 @@ AS
 				RETURN
 			END
 	COMMIT TRAN
+GO
+-- End update
+
+-- Update 17/11/2022 6:16
+CREATE PROC getCompanyById(@id int)
+AS (SELECT * FROM Company WHERE id = @id)
+GO
 -- End update
