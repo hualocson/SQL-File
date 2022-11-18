@@ -215,6 +215,6 @@ GO
 
 -- Update 18/11/2022 6:55 PM
 CREATE FUNCTION [dbo].[searchMemberInTeamByName](@team_id int,@name varchar(50)) RETURNS TABLE
-AS RETURN (SELECT * FROM AllMember WHERE team_id = @team_id AND name LIKE '%'+@name+'%')
+AS RETURN (SELECT * FROM AllMember WHERE team_id = @team_id AND name LIKE '%'+@name+'%' AND role = 1)
 GO
 -- End update
