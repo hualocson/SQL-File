@@ -203,7 +203,12 @@ AS
 GO
 -- End update
 
--- Update 18/11/2022 6:31 PM
-CREATE PROC getTaskByMemberId(@id int)
-AS (SELECT * FROM AllTasks WHERE assignee_id = @id)
+-- Update 18/11/2022 6:42 PM
+CREATE FUNCTION [dbo].[searchMemberInCompanyByName](@id int, @name varchar(50)) RETURNS TABLE
+AS RETURN (SELECT * FROM AllMember WHERE company_id = @id AND name LIKE '%'+@name+'%')
+GO
+
+CREATE FUNCTION [dbo].[searchProjectInCompanyByName](@id int, @name varchar(50)) RETURNS TABLE
+AS RETURN (SELECT * FROM AllProject WHERE company_id = @id AND name LIKE '%'+@name+'%')
 -- End update
+
