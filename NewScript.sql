@@ -124,3 +124,13 @@ CREATE OR ALTER PROC getTaskByStatusAndProjectId(@status_id int, @project_id int
 AS (SELECT * FROM AllTasks WHERE status_id = @status_id AND project_id = @project_id)
 GO
 -- End update
+
+-- Update 18/11/2022 4:48 PM
+CREATE OR ALTER PROC getTaskByStatusAndProjectAndTeamId(@status_id int, @project_id int, @team_id int)
+AS (SELECT * FROM AllTasks WHERE status_id = @status_id AND project_id = @project_id AND team_id = @team_id)
+GO
+
+CREATE OR ALTER PROC getTaskByStatusAndProjectAndMemberId(@status_id int, @project_id int, @member_id int)
+AS (SELECT * FROM AllTasks WHERE status_id = @status_id AND project_id = @project_id AND assignee_id = @member_id)
+GO
+-- End update
