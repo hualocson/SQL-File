@@ -149,12 +149,14 @@ AS
 	COMMIT TRAN
 GO
 
-CREATE OR ALTER PROC [dbo].[updateTask](@id int, @name varchar(128), @description text, @created_at datetime, @dueDate datetime, @progress float, @status_id int, @project_id int, @assignee_id int, @create_user int, @team_id int)
+CREATE OR ALTER PROC [dbo].[updateTask](@id int, @name varchar(128), @description text, @dueDate datetime, @progress float, @status_id int, @project_id int, @assignee_id int, @create_user int)
 AS 
 	BEGIN TRAN
 		DECLARE @old_assignee_id int
+		DECLARE @team_id int
 		SELECT @old_assignee_id = assignee_id FROM Tasks WHERE id = @id
-		UPDATE Tasks SET name = @name, description = @description,created_at = @created_at,dueDate = @dueDate,progress = @progress,status_id = @status_id,project_id = @project_id,assignee_id = @assignee_id,create_user = @create_user,team_id = @team_id WHERE id = @id
+		SELECT @team_id = team_id FROM Member WHERE id = @assignee_id
+		UPDATE Tasks SET name = @name, description = @description,dueDate = @dueDate,progress = @progress,status_id = @status_id,project_id = @project_id,assignee_id = @assignee_id,create_user = @create_user,team_id = @team_id WHERE id = @id
 		UPDATE Project_Member SET member_id = @assignee_id WHERE project_id = @project_id AND member_id = @old_assignee_id
 		IF (@@ERROR <> 0)
 			BEGIN
@@ -162,4 +164,41 @@ AS
 				RETURN
 			END
 	COMMIT TRAN
+GO
+-- End update
+
+-- Update 18/11/2022 5:40 PM
+CREATE OR ALTER PROC [dbo].[addTask](@name varchar(128), @description text, @dueDate datetime, @project_id int, @assignee_id int, @create_user int)
+AS	
+	BEGIN TRAN
+		DECLARE @created_at datetime
+		DECLARE @team_id int
+		SET @created_at = GETDATE()
+		SELECT @team_id = team_id FROM Member WHERE id = @assignee_id
+		INSERT INTO Tasks(name, description, created_at, dueDate, progress, status_id, project_id, assignee_id, create_user, team_id) VALUES(@name,@description,@created_at,@dueDate,0,3,@project_id,@assignee_id,@create_user,@team_id)
+		EXEC addMemberToProject @project_id, @assignee_id
+		IF (@@ERROR <> 0)
+			BEGIN
+				ROLLBACK
+				RETURN
+			END
+	COMMIT TRAN
+GO
+
+CREATE OR ALTER PROC [dbo].[updateTask](@id int, @name varchar(128), @description text, @dueDate datetime, @progress float, @status_id int, @project_id int, @assignee_id int, @create_user int)
+AS 
+	BEGIN TRAN
+		DECLARE @old_assignee_id int
+		DECLARE @team_id int
+		SELECT @old_assignee_id = assignee_id FROM Tasks WHERE id = @id
+		SELECT @team_id = team_id FROM Member WHERE id = @assignee_id
+		UPDATE Tasks SET name = @name, description = @description,dueDate = @dueDate,progress = @progress,status_id = @status_id,project_id = @project_id,assignee_id = @assignee_id,create_user = @create_user,team_id = @team_id WHERE id = @id
+		UPDATE Project_Member SET member_id = @assignee_id WHERE project_id = @project_id AND member_id = @old_assignee_id
+		IF (@@ERROR <> 0)
+			BEGIN
+				ROLLBACK
+				RETURN
+			END
+	COMMIT TRAN
+GO
 -- End update
