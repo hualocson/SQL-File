@@ -210,5 +210,11 @@ GO
 
 CREATE FUNCTION [dbo].[searchProjectInCompanyByName](@id int, @name varchar(50)) RETURNS TABLE
 AS RETURN (SELECT * FROM AllProject WHERE company_id = @id AND name LIKE '%'+@name+'%')
+GO
 -- End update
 
+-- Update 18/11/2022 6:55 PM
+CREATE FUNCTION [dbo].[searchMemberInTeamByName](@team_id int,@name varchar(50)) RETURNS TABLE
+AS RETURN (SELECT * FROM AllMember WHERE team_id = @team_id AND name LIKE '%'+@name+'%')
+GO
+-- End update
