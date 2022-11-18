@@ -91,7 +91,7 @@ AS RETURN (SELECT * FROM AllMember WHERE name LIKE '%'+@name+'%')
 GO
 -- End update
 
--- Update 18/11/2022 10:34 PM
+-- Update 18/11/2022 10:34 AM
 CREATE OR ALTER PROC updateTaskStatus(@task_id int, @status_id int)
 AS 
 	BEGIN TRAN
@@ -116,4 +116,11 @@ DROP PROC [dbo].[updateCompanyDetails]
 DROP PROC [dbo].[updateRole]
 DROP VIEW AllRole
 DROP VIEW AllTaskStatus
+GO
+-- End update
+
+-- Update 18/11/2022 11:07 AM
+CREATE OR ALTER PROC getTaskByStatusAndProjectId(@status_id int, @project_id int)
+AS (SELECT * FROM AllTasks WHERE status_id = @status_id AND project_id = @project_id)
+GO
 -- End update
