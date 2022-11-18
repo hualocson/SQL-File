@@ -90,3 +90,30 @@ CREATE OR ALTER FUNCTION searchMemberByName(@name varchar(50)) RETURNS TABLE
 AS RETURN (SELECT * FROM AllMember WHERE name LIKE '%'+@name+'%')
 GO
 -- End update
+
+-- Update 18/11/2022 10:34 PM
+CREATE OR ALTER PROC updateTaskStatus(@task_id int, @status_id int)
+AS 
+	BEGIN TRAN
+		UPDATE Tasks SET status_id = @status_id WHERE id = @task_id
+		IF (@@ERROR <> 0)
+			BEGIN
+				ROLLBACK
+				RETURN
+			END
+	COMMIT TRAN
+GO
+
+DROP PROC addCompanyDetails
+DROP PROC addRole
+DROP PROC addTaskStatus
+DROP PROC deleteCompanyDetails
+DROP PROC deleteRole
+DROP PROC deleteTaskStatus
+DROP PROC getAllTaskStatus
+DROP PROC getAllRole
+DROP PROC [dbo].[updateCompanyDetails]
+DROP PROC [dbo].[updateRole]
+DROP VIEW AllRole
+DROP VIEW AllTaskStatus
+-- End update
